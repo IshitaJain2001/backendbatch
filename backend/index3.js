@@ -1,14 +1,11 @@
- // express
- import express from "express"
-import userRouter from "./Routers/userRouter.js"
-import dotenv from "dotenv"
-dotenv.config()
- //instance (server)
+  
+   import express from "express"
+   import dotenv from "dotenv"
+import connection from "./config/db.config.js"
+   dotenv.config()
 
- const app= express()
-app.use(express.json())
- // routers ka set up 
+   const app= express()
+connection()
 
- app.use("/user", userRouter)
 
- app.listen(process.env.PORT)
+   app.listen(process.env.PORT)
