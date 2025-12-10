@@ -1,72 +1,21 @@
- import bcrypt from "bcrypt";
- const users=[]
+import userModel from "../schemas/userSchema.js"
 
+ export default async function signup(req, res){
+let {firstName, lastName,password, userName, email}= req.body 
+if(!firstName || !userName || !email){
+   return res.status(400).json({
+      message:"please enter all details "
+   })
 
- export async function signup(req,res){
-const {name, email, password, username}= req.body
- //bcrypt ** 
-
-//  vxhdv => hacking 
-
-const hashedPassword=await  bcrypt.hash(password, 10)
-const user= {
-    name, email, password:hashedPassword, username
 }
-users.push(user);
 
-res.send(users)
- }
+let user = new userModel({
+   firstName, lastName,userName,password,email
+})
 
-
-
-
-
-
-  export async function login(req,res){
-
-let {email, password}= req.body
-
-
- // email, password 
-
- if(!email.trim() || !password.trim()){
-   return res.send("email and password both are required ")
- }       
-
-
-// email -> invalid credentials
-
-// let emailFound= users.find((user)=> user.email == email)
-let emailFound= users.find((u)=>u.email==email)
-console.log(emailFound);
-
- if(emailFound){
-    // return res.send(emailFound)
-
- let isVerified=  await bcrypt.compare(password, emailFound.password)
-
- if(isVerified){
-    return res.send(`user loggedin successfully , welcome ${emailFound.name}`)
- }
- else{
-    return res.send("incorrect password ")
- }
- }
- else{
-    return res.send("incorrect email ")
- }
-// email shi h pr password glt h - // invalid credentials 
-
-// email password 
- }
-
-
-
-  export async function update(req,res){
+await user.save()
+return res.json({
+   message:"new user saved successfully !!"
+})
 
  }
-  export async function deleteUser(req,res){
-
- }
-
- 
