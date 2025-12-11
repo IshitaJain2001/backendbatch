@@ -20,10 +20,7 @@ const userSchema=   new Schema({
         type:String,
         minlength:9,
         required:true,
-        validate :{
-            validator: validator.isStrongPassword,
-            message:"weak password "
-        }},
+       },
     email:{
         type:String,
         required: true,
@@ -37,3 +34,7 @@ const userSchema=   new Schema({
  const userModel=  new mongoose.model("USERS",userSchema)
 
  export default userModel
+
+
+
+

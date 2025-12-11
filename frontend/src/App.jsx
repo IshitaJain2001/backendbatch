@@ -5,7 +5,9 @@ export default function App() {
   const [signformDetails, setSignFormDetails] = useState({
     email:"",
     password:"",
-    firstName:""
+    firstName:"",
+    lastName:"",
+    userName:""
   })
 
    const [loginformdetails, setLoginForm]= useState({
@@ -16,11 +18,8 @@ export default function App() {
    const [action, setAction]= useState("login")
 
  async  function onSignSubmitHandler(){
- // api integration 
 
- // restful api
-
- if(signformDetails.email.trim()=="" || signformDetails.password.trim()==""|| signformDetails.firstName.trim()==""){
+ if(signformDetails.email.trim()=="" || signformDetails.password.trim()==""|| signformDetails.firstName.trim()=="" || signformDetails.userName.trim()=="" ){
   return alert("please fill in details ")
  }
 
@@ -28,11 +27,6 @@ export default function App() {
 
  
 let res= await fetch("http://localhost:3000/user/signup",{
-// method - 
-// req.body
-// json 
-// credentials cookies 
-
 method:"POST",
 body: JSON.stringify(signformDetails),
 headers:{
@@ -80,6 +74,18 @@ credentials: "include"
           ...signformDetails,
           firstName:e.target.value 
         })} placeholder='firstName'/>
+
+
+
+  <input type="text"  onChange={e=>setSignFormDetails({
+          ...signformDetails,
+          lastName:e.target.value
+        })} placeholder='lastName'/>
+        <input type="text" name="" id="" onChange={e=>setSignFormDetails({
+          ...signformDetails,
+          userName:e.target.value 
+        })} placeholder='userName'/>
+
         <button onClick={onSignSubmitHandler }>submit</button>
       </form>
 }
