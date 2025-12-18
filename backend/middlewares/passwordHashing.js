@@ -1,6 +1,9 @@
  import bcrypt from "bcrypt"
  import validator from "validator"
 export default  async function passwordHashing(req, res , next ){
+    console.log("req in middleware received ");
+    console.log(req.body);
+    
  let {password} = req.body
 
 let isStrong= validator.isStrongPassword(password)

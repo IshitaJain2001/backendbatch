@@ -17,8 +17,8 @@ export default function App() {
 
    const [action, setAction]= useState("login")
 
- async  function onSignSubmitHandler(){
-
+ async  function onSignSubmitHandler(e){
+e.preventDefault()
  if(signformDetails.email.trim()=="" || signformDetails.password.trim()==""|| signformDetails.firstName.trim()=="" || signformDetails.userName.trim()=="" ){
   return alert("please fill in details ")
  }
@@ -28,12 +28,17 @@ export default function App() {
  
 let res= await fetch("http://localhost:3000/user/signup",{
 method:"POST",
-body: JSON.stringify(signformDetails),
 headers:{
-  "Content-Type":"/application/json"
+  "Content-Type":"application/json"
 },
+body: JSON.stringify(signformDetails),
+
 credentials: "include"
  })
+
+let data= await  res.json()
+console.log(data);
+
   }}
 
   

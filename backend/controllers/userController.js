@@ -1,7 +1,11 @@
 import userModel from "../schemas/userSchema.js"
 
  export default async function signup(req, res){
-let {firstName, lastName,password, userName, email}= req.body 
+   console.log("---");
+   console.log(req.body);
+   
+   
+   let {firstName, lastName,password, userName, email}= req.body 
 if(!firstName || !userName || !email){
    return res.status(400).json({
       message:"please enter all details "
@@ -19,3 +23,8 @@ return res.json({
 })
 
  }
+
+
+ export   async function login(){
+
+  }
